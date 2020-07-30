@@ -17,7 +17,7 @@ target/
 .settings/
 blog/bin/
 .tern-project
-src/main/resources/application.properties
+**/.src/main/resources/application.properties
 
 #IntelliJ files
 **/*.iml
