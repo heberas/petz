@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -21,37 +23,46 @@ public class Cliente {
 	@NotBlank
 	private String sexo;
 	@NotEmpty
+	@CPF
 	private String cpf;
 	private String pet;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getSexo() {
 		return sexo;
 	}
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getPet() {
 		return pet;
 	}
+
 	public void setPet(String pet) {
 		this.pet = pet;
 	}
