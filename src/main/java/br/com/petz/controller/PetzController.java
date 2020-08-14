@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
+import br.com.petz.model.Retorno;
 import br.com.petz.service.PetzService;
 
 @RestController
@@ -42,30 +43,31 @@ public class PetzController {
 	public ResponseEntity<List<Cliente>> listandoCliente() {
 		return new ResponseEntity<List<Cliente>>(petzService.retrieveCliente(), new HttpHeaders(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/retrieve/pet")
 	public ResponseEntity<List<Pet>> listandoPet() {
 		return new ResponseEntity<List<Pet>>(petzService.retrievePet(), new HttpHeaders(), HttpStatus.OK);
 	}
 
 	@PutMapping("/update/cliente/{id}")
-	public ResponseEntity<HttpStatus> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente)
+	public ResponseEntity<Retorno> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente)
 			throws RoleInfoNotFoundException {
 
 		petzService.updateClienteById(id, cliente);
 
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return ResponseEntity.ok(petzService.updateClienteById(id, cliente));
+
 	}
 
 	@PutMapping("/update/pet/{id}")
-	public ResponseEntity<HttpStatus> updatePet(@PathVariable("id") long id, @RequestBody Pet pet)
+	public ResponseEntity<Retorno> updatePet(@PathVariable("id") long id, @RequestBody Pet pet)
 			throws RoleInfoNotFoundException {
 
 		petzService.updatePetById(id, pet);
 
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return ResponseEntity.ok(petzService.updatePetById(id, pet));
 	}
-	
+
 	@DeleteMapping("/delete/cliente/{id}")
 	public ResponseEntity<HttpStatus> deleteClienteById(@PathVariable("id") long id) throws RoleInfoNotFoundException {
 
@@ -73,7 +75,7 @@ public class PetzController {
 
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/delete/pet/{id}")
 	public ResponseEntity<HttpStatus> deletePetById(@PathVariable("id") long id) throws RoleInfoNotFoundException {
 

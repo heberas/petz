@@ -6,12 +6,14 @@ import java.util.Optional;
 import javax.management.relation.RoleInfoNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
+import br.com.petz.model.Retorno;
 import br.com.petz.repository.PetzClienteRepository;
 import br.com.petz.repository.PetzPetRepository;
 
@@ -44,7 +46,9 @@ public class PetzService {
 		return petzPetRepository.findAll();
 	}
 
-	public void updateClienteById(long id, Cliente cliente) throws RoleInfoNotFoundException {
+	public Retorno updateClienteById(long id, Cliente cliente) {
+
+		Retorno retorno = new Retorno();
 
 		Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
 
@@ -57,12 +61,24 @@ public class PetzService {
 
 			petzClienteRepository.save(cliente);
 
-		} else {
-			throw new RoleInfoNotFoundException("No exist for given id");
 		}
+		if (HttpStatus.OK != null && updateCliente.isPresent()) {
+			retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
+			retorno.setMensagem("Dados Atualizados com Sucesso");
+
+		} else {
+
+			retorno.setCodigo(CommonsUtils.STATUS_FAIL);
+			retorno.setMensagem("Não foi possível atualizar os dados.");
+
+		}
+
+		return retorno;
 	}
 
-	public void updatePetById(long id, Pet pet) throws RoleInfoNotFoundException {
+	public Retorno updatePetById(long id, Pet pet) {
+
+		Retorno retorno = new Retorno();
 
 		Optional<Pet> updatePet = petzPetRepository.findById(id);
 
@@ -75,9 +91,20 @@ public class PetzService {
 
 			petzPetRepository.save(pet);
 
-		} else {
-			throw new RoleInfoNotFoundException("No exist for given id");
 		}
+
+		if (HttpStatus.OK != null && updatePet.isPresent()) {
+			retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
+			retorno.setMensagem("Dados Atualizados com Sucesso");
+
+		} else {
+
+			retorno.setCodigo(CommonsUtils.STATUS_FAIL);
+			retorno.setMensagem("Não foi possível atualizar os dados.");
+
+		}
+
+		return retorno;
 	}
 
 	public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
@@ -89,6 +116,7 @@ public class PetzService {
 		} else {
 			throw new RoleInfoNotFoundException("No employee record exist for given id");
 		}
+
 	}
 
 	public void deletePetById(Long id) throws RoleInfoNotFoundException {
@@ -100,6 +128,6 @@ public class PetzService {
 		} else {
 			throw new RoleInfoNotFoundException("No employee record exist for given id");
 		}
-	}
 
+	}
 }
