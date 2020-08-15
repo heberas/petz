@@ -30,28 +30,27 @@ public class PetzController {
 	private PetzService petzService;
 
 	@PostMapping("/create/cliente")
-	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws RoleInfoNotFoundException {
-		return new ResponseEntity<Cliente>(petzService.createCliente(cliente), HttpStatus.OK);
+	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
+		return new ResponseEntity<>(petzService.createCliente(cliente), HttpStatus.OK);
 	}
 
 	@PostMapping("/create/pet")
-	public ResponseEntity<Pet> createPet(@RequestBody Pet pet) throws RoleInfoNotFoundException {
-		return new ResponseEntity<Pet>(petzService.createPet(pet), HttpStatus.OK);
+	public ResponseEntity<Pet> createPet(@RequestBody Pet pet) {
+		return new ResponseEntity<>(petzService.createPet(pet), HttpStatus.OK);
 	}
 
 	@GetMapping("/retrieve/cliente")
 	public ResponseEntity<List<Cliente>> listandoCliente() {
-		return new ResponseEntity<List<Cliente>>(petzService.retrieveCliente(), new HttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<>(petzService.retrieveCliente(), new HttpHeaders(), HttpStatus.OK);
 	}
 
 	@GetMapping("/retrieve/pet")
 	public ResponseEntity<List<Pet>> listandoPet() {
-		return new ResponseEntity<List<Pet>>(petzService.retrievePet(), new HttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<>(petzService.retrievePet(), new HttpHeaders(), HttpStatus.OK);
 	}
 
 	@PutMapping("/update/cliente/{id}")
-	public ResponseEntity<Retorno> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente)
-			throws RoleInfoNotFoundException {
+	public ResponseEntity<Retorno> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente) {
 
 		petzService.updateClienteById(id, cliente);
 
@@ -60,8 +59,7 @@ public class PetzController {
 	}
 
 	@PutMapping("/update/pet/{id}")
-	public ResponseEntity<Retorno> updatePet(@PathVariable("id") long id, @RequestBody Pet pet)
-			throws RoleInfoNotFoundException {
+	public ResponseEntity<Retorno> updatePet(@PathVariable("id") long id, @RequestBody Pet pet) {
 
 		petzService.updatePetById(id, pet);
 
@@ -73,7 +71,7 @@ public class PetzController {
 
 		petzService.deleteClienteById(id);
 
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/pet/{id}")
@@ -81,7 +79,7 @@ public class PetzController {
 
 		petzService.deletePetById(id);
 
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

@@ -26,13 +26,13 @@ public class PetzService {
 	@Autowired
 	private PetzPetRepository petzPetRepository;
 
-	public Cliente createCliente(Cliente cliente) throws RoleInfoNotFoundException {
+	public Cliente createCliente(Cliente cliente) {
 
 		return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
 
 	}
 
-	public Pet createPet(Pet pet) throws RoleInfoNotFoundException {
+	public Pet createPet(Pet pet) {
 
 		return petzPetRepository.save(DozerBeanMapperBuilder.buildDefault().map(pet, Pet.class));
 
