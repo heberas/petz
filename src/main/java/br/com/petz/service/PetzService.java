@@ -107,7 +107,7 @@ public class PetzService {
 		return retorno;
 	}
 
-	public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
+	public void deleteClienteById(Long id) throws RoleInfoNotFoundException, RuntimeException {
 
 		Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
 
@@ -119,7 +119,7 @@ public class PetzService {
 
 	}
 
-	public void deletePetById(Long id) throws RoleInfoNotFoundException {
+	public void deletePetById(Long id) throws RoleInfoNotFoundException, RuntimeException {
 
 		Optional<Pet> deletePet = petzPetRepository.findById(id);
 

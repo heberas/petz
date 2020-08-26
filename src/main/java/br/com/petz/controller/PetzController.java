@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.petz.model.Cliente;
@@ -66,16 +67,16 @@ public class PetzController {
 		return ResponseEntity.ok(petzService.updatePetById(id, pet));
 	}
 
-	@DeleteMapping("/delete/cliente/{id}")
-	public ResponseEntity<HttpStatus> deleteClienteById(@PathVariable("id") long id) throws RoleInfoNotFoundException {
+	@DeleteMapping("/delete/cliente")
+	public ResponseEntity<HttpStatus> deleteClienteById(@RequestParam long id) throws RoleInfoNotFoundException {
 
 		petzService.deleteClienteById(id);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/pet/{id}")
-	public ResponseEntity<HttpStatus> deletePetById(@PathVariable("id") long id) throws RoleInfoNotFoundException {
+	@DeleteMapping("/delete/pet")
+	public ResponseEntity<HttpStatus> deletePetById(@RequestParam long id) throws RoleInfoNotFoundException {
 
 		petzService.deletePetById(id);
 
