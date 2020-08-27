@@ -14,7 +14,7 @@ public class PetzMock {
 	@Mock
 	PetzEntityTest petzEntityTest;
 
-	public List<PetzEntityTest> getListaArquivosMurexMock() {
+	public List<PetzEntityTest> getListaArquivosPetzMock() {
 
 		return Lists.newArrayList(petzEntityTest);
 	}
