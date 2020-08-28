@@ -28,7 +28,12 @@ public class PetzService {
 
 	public Cliente createCliente(Cliente cliente) {
 
-		return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
+		Cliente mocado = new Cliente();
+		mocado.setCpf("02503199500");
+		mocado.setNome("mocadonome");
+		mocado.setPet("mocadopet");
+		mocado.setSexo("mocadosexo");
+		return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(mocado, Cliente.class));
 
 	}
 
