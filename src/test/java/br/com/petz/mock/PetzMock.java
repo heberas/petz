@@ -21,14 +21,14 @@ public class PetzMock {
 
 	public Cliente getMockClientePetz() {
 
-		Cliente arquivos = new Cliente();
+		Cliente mock = new Cliente();
 		Date data = new Date();
 
-		arquivos.setNome(data.toString());
-		arquivos.setSexo(data.toString());
-		arquivos.setCpf(data.toString());
-		arquivos.setPet(data.toString());
+		mock.setNome(data.toString());
+		mock.setSexo(data.toString());
+		mock.setCpf(data.toString());
+		mock.setPet(data.toString());
 
-		return arquivos;
+		return mock;
 	}
 }

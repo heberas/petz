@@ -28,13 +28,19 @@ public class PetzServiceTest extends PetzMock {
 	@Test
 	public void testClientePetz() throws RoleInfoNotFoundException {
 
-		Cliente arquivos = new Cliente();
-		Cliente codTest = new Cliente();
+		Cliente codMockTest = new Cliente();
+		codMockTest.setNome("COD-TEST");
+		codMockTest.setCpf("02503199500");
+		codMockTest.setPet("Cachorro-TEST");
+		codMockTest.setSexo("Masculino-TEST");
 
-		codTest.setNome("COD-TEST");
-		arquivos.setNome(codTest.toString());
+		Cliente mockCliente = new Cliente();
+		mockCliente.setNome(codMockTest.toString());
+		mockCliente.setCpf(codMockTest.toString());
+		mockCliente.setPet(codMockTest.toString());
+		mockCliente.setSexo(codMockTest.toString());
 
-		when(petzService.createCliente(codTest)).thenReturn(arquivos);
+		when(petzService.createCliente(codMockTest)).thenReturn(mockCliente);
 	}
 
 }
