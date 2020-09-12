@@ -20,119 +20,121 @@ import br.com.petz.repository.PetzPetRepository;
 @Service
 public class PetzService {
 
-	@Autowired
-	private PetzClienteRepository petzClienteRepository;
+    @Autowired
+    private PetzClienteRepository petzClienteRepository;
 
-	@Autowired
-	private PetzPetRepository petzPetRepository;
+    @Autowired
+    private PetzPetRepository petzPetRepository;
 
-	public Cliente createCliente(Cliente cliente) {
+    public Cliente createCliente(Cliente cliente) {
 
-		Cliente mocado = new Cliente();
-		mocado.setCpf("02503199500");
-		mocado.setNome("mocadonome");
-		mocado.setPet("mocadopet");
-		mocado.setSexo("mocadosexo");
-		return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(mocado, Cliente.class));
+        Cliente mocado = new Cliente();
+        mocado.setCpf("02503199500");
+        mocado.setNome("mocadonome");
+        mocado.setPet("mocadopet");
+        mocado.setSexo("mocadosexo");
+        return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(mocado, Cliente.class));
 
-	}
+    }
 
-	public Pet createPet(Pet pet) {
+    public Pet createPet(Pet pet) {
 
-		return petzPetRepository.save(DozerBeanMapperBuilder.buildDefault().map(pet, Pet.class));
+        return petzPetRepository.saveAndFlush(pet);
 
-	}
+    }
 
-	public List<Cliente> retrieveCliente() {
-		return petzClienteRepository.findAll();
-	}
+    public List<Cliente> retrieveCliente() {
 
-	public List<Pet> retrievePet() {
-		return petzPetRepository.findAll();
-	}
+        return petzClienteRepository.findAll();
+    }
 
-	public Retorno updateClienteById(long id, Cliente cliente) {
+    public List<Pet> retrievePet() {
 
-		Retorno retorno = new Retorno();
+        return petzPetRepository.findAll();
+    }
 
-		Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
+    public Retorno updateClienteById(long id, Cliente cliente) {
 
-		if (updateCliente.isPresent()) {
+        Retorno retorno = new Retorno();
 
-			cliente.setCpf(cliente.getCpf());
-			cliente.setNome(cliente.getNome());
-			cliente.setPet(cliente.getPet());
-			cliente.setSexo(cliente.getSexo());
+        Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
 
-			petzClienteRepository.save(cliente);
+        if (updateCliente.isPresent()) {
 
-		}
-		if (HttpStatus.OK != null && updateCliente.isPresent()) {
-			retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
-			retorno.setMensagem("Dados Atualizados com Sucesso");
+            cliente.setCpf(cliente.getCpf());
+            cliente.setNome(cliente.getNome());
+            cliente.setPet(cliente.getPet());
+            cliente.setSexo(cliente.getSexo());
 
-		} else {
+            petzClienteRepository.save(cliente);
 
-			retorno.setCodigo(CommonsUtils.STATUS_FAIL);
-			retorno.setMensagem("Não foi possível atualizar os dados.");
+        }
+        if (HttpStatus.OK != null && updateCliente.isPresent()) {
+            retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
+            retorno.setMensagem("Dados Atualizados com Sucesso");
 
-		}
+        } else {
 
-		return retorno;
-	}
+            retorno.setCodigo(CommonsUtils.STATUS_FAIL);
+            retorno.setMensagem("Não foi possível atualizar os dados.");
 
-	public Retorno updatePetById(long id, Pet pet) {
+        }
 
-		Retorno retorno = new Retorno();
+        return retorno;
+    }
 
-		Optional<Pet> updatePet = petzPetRepository.findById(id);
+    public Retorno updatePetById(long id, Pet pet) {
 
-		if (updatePet.isPresent()) {
+        Retorno retorno = new Retorno();
 
-			pet.setIdade(pet.getIdade());
-			pet.setProduto(pet.getProduto());
-			pet.setTipoPet(pet.getTipoPet());
-			pet.setValor(pet.getValor());
+        Optional<Pet> updatePet = petzPetRepository.findById(id);
 
-			petzPetRepository.save(pet);
+        if (updatePet.isPresent()) {
 
-		}
+            pet.setIdade(pet.getIdade());
+            pet.setProduto(pet.getProduto());
+            pet.setTipoPet(pet.getTipoPet());
+            pet.setValor(pet.getValor());
 
-		if (HttpStatus.OK != null && updatePet.isPresent()) {
-			retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
-			retorno.setMensagem("Dados Atualizados com Sucesso");
+            petzPetRepository.save(pet);
 
-		} else {
+        }
 
-			retorno.setCodigo(CommonsUtils.STATUS_FAIL);
-			retorno.setMensagem("Não foi possível atualizar os dados.");
+        if (HttpStatus.OK != null && updatePet.isPresent()) {
+            retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
+            retorno.setMensagem("Dados Atualizados com Sucesso");
 
-		}
+        } else {
 
-		return retorno;
-	}
+            retorno.setCodigo(CommonsUtils.STATUS_FAIL);
+            retorno.setMensagem("Não foi possível atualizar os dados.");
 
-	public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
+        }
 
-		Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
+        return retorno;
+    }
 
-		if (deleteCliente.isPresent()) {
-			petzClienteRepository.deleteById(id);
-		} else {
-			throw new RoleInfoNotFoundException("No employee record exist for given id");
-		}
+    public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
 
-	}
+        Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
 
-	public void deletePetById(Long id) throws RoleInfoNotFoundException {
+        if (deleteCliente.isPresent()) {
+            petzClienteRepository.deleteById(id);
+        } else {
+            throw new RoleInfoNotFoundException("No employee record exist for given id");
+        }
 
-		Optional<Pet> deletePet = petzPetRepository.findById(id);
+    }
 
-		if (deletePet.isPresent()) {
-			petzPetRepository.deleteById(id);
-		} else {
-			throw new RoleInfoNotFoundException("No employee record exist for given id");
-		}
+    public void deletePetById(Long id) throws RoleInfoNotFoundException {
 
-	}
+        Optional<Pet> deletePet = petzPetRepository.findById(id);
+
+        if (deletePet.isPresent()) {
+            petzPetRepository.deleteById(id);
+        } else {
+            throw new RoleInfoNotFoundException("No employee record exist for given id");
+        }
+
+    }
 }
