@@ -20,21 +20,19 @@ public class PetzApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PetzApplication.class, args);
 	}
-	
-	@Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).select()  
-           .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-           .paths(PathSelectors.any()).build().pathMapping("/")
-           .apiInfo(apiInfo()).useDefaultResponseMessages(false);
-    }
 
-    @Bean
-    public ApiInfo apiInfo() {
-        final ApiInfoBuilder builder = new ApiInfoBuilder();
-        builder.title("Documentation Swagger").version("1.0").license("Enterprise HB")
-        .description("");
-        return builder.build();
-        }
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.withClassAnnotation(Api.class)).paths(PathSelectors.any()).build()
+				.pathMapping("/").apiInfo(apiInfo()).useDefaultResponseMessages(false);
+	}
+
+	@Bean
+	public ApiInfo apiInfo() {
+		final ApiInfoBuilder builder = new ApiInfoBuilder();
+		builder.title("Documentation Swagger").version("1.0").license("Enterprise HB").description("");
+		return builder.build();
+	}
 
 }
