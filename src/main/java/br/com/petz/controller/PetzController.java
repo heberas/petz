@@ -24,12 +24,19 @@ import br.com.petz.model.Retorno;
 import br.com.petz.service.PetzService;
 
 @RestController
+@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "Success OK"),
+            @ApiResponse(code = 401, message = "not authorized"), 
+            @ApiResponse(code = 403, message = "forbidden"),
+            @ApiResponse(code = 404, message = "not found") })
 @RequestMapping("/api/petz")
+@Api(value = "API petz")
 public class PetzController {
 
 	@Autowired
 	private PetzService petzService;
-
+	
+	@ApiOperation(value = "Creating new client")
 	@PostMapping("/create/cliente")
 	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
 		return new ResponseEntity<>(petzService.createCliente(cliente), HttpStatus.OK);
