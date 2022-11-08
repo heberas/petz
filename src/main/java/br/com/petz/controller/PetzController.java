@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.management.relation.RoleInfoNotFoundException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +28,7 @@ import br.com.petz.model.Retorno;
 import br.com.petz.service.PetzService;
 
 @RestController
-@ApiResponses(value = { 
+@ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 201, message = "Created"),
             @ApiResponse(code = 401, message = "Unauthorized"), 
