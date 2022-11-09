@@ -30,14 +30,19 @@ public class PetzService {
     private static final String STATUS_FAIL = "0";
 
     public Cliente createCliente(Cliente cliente) {
-        return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
-
+        try {
+            return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     public Pet createPet(Pet pet) {
-
-        return petzPetRepository.saveAndFlush(pet);
-
+        try {
+            return petzPetRepository.saveAndFlush(pet);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     public List<Cliente> retrieveCliente() {

@@ -42,11 +42,6 @@ public class Cliente {
 		this.id = id;
 	}
 
-	@Transient
-	public boolean isNew() { 
-		return null == getId();
-	}
-
 	public String getNome() {
 		return nome;
 	}

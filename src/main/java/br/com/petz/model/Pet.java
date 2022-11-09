@@ -38,11 +38,6 @@ public class Pet {
 		this.id = id;
 	}
 
-	@Transient
-	public boolean isNew() {
-		return null == getId();
-	}
-
 	public String getTipoPet() {
 		return tipoPet;
 	}
