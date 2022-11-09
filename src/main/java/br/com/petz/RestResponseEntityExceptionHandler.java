@@ -13,6 +13,6 @@ public class RestResponseEntityExceptionHandler  {
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleNoHandlerFoundException(NoHandlerFoundException ex) {
     	
-    	return "Rota inválida!" + " " + "Por gentileza, adicionar caminho completo do serviço desejado.";
+    	return "Invalid route!" + " " + "Please add the full path of the desired service.";
     }
 }
