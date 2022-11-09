@@ -26,6 +26,9 @@ public class PetzService {
     @Autowired
     private PetzPetRepository petzPetRepository;
 
+    private static final String STATUS_SUCCESS = "0";
+    private static final String STATUS_FAIL = "1";
+
     public Cliente createCliente(Cliente cliente) {
         return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
 
@@ -64,12 +67,12 @@ public class PetzService {
 
         }
         if (HttpStatus.OK != null && updateCliente.isPresent()) {
-            retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
+            retorno.setCodigo(STATUS_SUCCESS);
             retorno.setMensagem("Data Updated Successfully");
 
         } else {
 
-            retorno.setCodigo(CommonsUtils.STATUS_FAIL);
+            retorno.setCodigo(STATUS_FAIL);
             retorno.setMensagem("Unable to update data");
 
         }
@@ -95,12 +98,12 @@ public class PetzService {
         }
 
         if (HttpStatus.OK != null && updatePet.isPresent()) {
-            retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
+            retorno.setCodigo(STATUS_SUCCESS);
             retorno.setMensagem("Data Updated Successfully");
 
         } else {
 
-            retorno.setCodigo(CommonsUtils.STATUS_FAIL);
+            retorno.setCodigo(STATUS_FAIL);
             retorno.setMensagem("Unable to update data");
 
         }
