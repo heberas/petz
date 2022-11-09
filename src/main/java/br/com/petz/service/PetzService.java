@@ -26,8 +26,8 @@ public class PetzService {
     @Autowired
     private PetzPetRepository petzPetRepository;
 
-    private static final String STATUS_SUCCESS = "0";
-    private static final String STATUS_FAIL = "1";
+    private static final String STATUS_SUCCESS = "1";
+    private static final String STATUS_FAIL = "0";
 
     public Cliente createCliente(Cliente cliente) {
         return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
@@ -57,13 +57,14 @@ public class PetzService {
         Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
 
         if (updateCliente.isPresent()) {
+            Cliente update = new Cliente();
+            update.setId(id);
+            update.setCpf(cliente.getCpf());
+            update.setNome(cliente.getNome());
+            update.setPet(cliente.getPet());
+            update.setSexo(cliente.getSexo());
 
-            cliente.setCpf(cliente.getCpf());
-            cliente.setNome(cliente.getNome());
-            cliente.setPet(cliente.getPet());
-            cliente.setSexo(cliente.getSexo());
-
-            petzClienteRepository.save(cliente);
+            petzClienteRepository.save(update);
 
         }
         if (HttpStatus.OK != null && updateCliente.isPresent()) {
@@ -87,13 +88,14 @@ public class PetzService {
         Optional<Pet> updatePet = petzPetRepository.findById(id);
 
         if (updatePet.isPresent()) {
+            Pet update = new Pet();
+            update.setId(id);
+            update.setIdade(pet.getIdade());
+            update.setProduto(pet.getProduto());
+            update.setTipoPet(pet.getTipoPet());
+            update.setValor(pet.getValor());
 
-            pet.setIdade(pet.getIdade());
-            pet.setProduto(pet.getProduto());
-            pet.setTipoPet(pet.getTipoPet());
-            pet.setValor(pet.getValor());
-
-            petzPetRepository.save(pet);
+            petzPetRepository.save(update);
 
         }
 
