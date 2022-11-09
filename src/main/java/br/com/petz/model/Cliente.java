@@ -42,7 +42,6 @@ public class Cliente {
 		this.id = id;
 	}
 
-	//se retornar "true" é pq não houve persistência
 	@Transient
 	public boolean isNew() { 
 		return null == getId();

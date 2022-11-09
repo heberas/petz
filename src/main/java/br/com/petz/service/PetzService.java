@@ -27,13 +27,7 @@ public class PetzService {
     private PetzPetRepository petzPetRepository;
 
     public Cliente createCliente(Cliente cliente) {
-
-        Cliente mocado = new Cliente();
-        mocado.setCpf("02503199500");
-        mocado.setNome("mocadonome");
-        mocado.setPet("mocadopet");
-        mocado.setSexo("mocadosexo");
-        return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(mocado, Cliente.class));
+        return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
 
     }
 
@@ -71,12 +65,12 @@ public class PetzService {
         }
         if (HttpStatus.OK != null && updateCliente.isPresent()) {
             retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
-            retorno.setMensagem("Dados Atualizados com Sucesso");
+            retorno.setMensagem("Data Updated Successfully");
 
         } else {
 
             retorno.setCodigo(CommonsUtils.STATUS_FAIL);
-            retorno.setMensagem("Não foi possível atualizar os dados.");
+            retorno.setMensagem("Unable to update data");
 
         }
 
@@ -102,12 +96,12 @@ public class PetzService {
 
         if (HttpStatus.OK != null && updatePet.isPresent()) {
             retorno.setCodigo(CommonsUtils.STATUS_SUCCESS);
-            retorno.setMensagem("Dados Atualizados com Sucesso");
+            retorno.setMensagem("Data Updated Successfully");
 
         } else {
 
             retorno.setCodigo(CommonsUtils.STATUS_FAIL);
-            retorno.setMensagem("Não foi possível atualizar os dados.");
+            retorno.setMensagem("Unable to update data");
 
         }
 
