@@ -48,7 +48,7 @@ public class PetzController {
 		return new ResponseEntity<>(petzService.createCliente(cliente), HttpStatus.CREATED);
 
 	}
-
+	@ApiOperation(value = "Creating new pet")
 	@PostMapping("/create/pet")
 	public ResponseEntity<Pet> createPet(@RequestBody Pet pet) {
 		return new ResponseEntity<>(petzService.createPet(pet), HttpStatus.CREATED);

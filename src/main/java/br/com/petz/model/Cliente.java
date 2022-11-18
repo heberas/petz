@@ -1,17 +1,6 @@
 package br.com.petz.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.br.CPF;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cliente")
@@ -21,14 +10,9 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	@NotNull(message = "nome cannot be null")
-	@Column(name = "nome")
 	private String nome;
-	@NotBlank
 	@Column(name = "sexo", nullable = false)
 	private String sexo;
-	@NotEmpty
-	@CPF
 	@Column(name = "cpf", nullable = false)
 	private String cpf;
 	@Column(name = "pet", nullable = false)

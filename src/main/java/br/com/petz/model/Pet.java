@@ -6,10 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pet")
@@ -18,13 +14,10 @@ public class Pet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	@NotNull(message = "tipoPet cannot be null")
 	@Column(name = "tipoPet")
 	private String tipoPet;
-	@NotBlank
 	@Column(name = "idade", nullable = false)
 	private String idade;
-	@NotEmpty
 	@Column(name = "produto", nullable = false)
 	private String produto;
 	@Column(name = "valor", nullable = false)
