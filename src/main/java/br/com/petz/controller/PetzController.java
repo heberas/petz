@@ -28,14 +28,6 @@ import br.com.petz.model.Retorno;
 import br.com.petz.service.PetzService;
 
 @RestController
-@ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 201, message = "Created"),
-            @ApiResponse(code = 401, message = "Unauthorized"), 
-            @ApiResponse(code = 403, message = "Forbidden"),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Internal Server Error")})
-@RequestMapping("/api/petz")
 @Api(value = "API PETZ")
 public class PetzController {
 
