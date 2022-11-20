@@ -20,62 +20,53 @@ import java.util.List;
 @Api(value = "API PETZ")
 public class PetzController {
 
-	@Autowired
-	private PetzService petzService;
-	
-	@ApiOperation(value = "Creating new client")
-	@PostMapping("/create/cliente")
-	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws Throwable {
-		return new ResponseEntity<>(petzService.createCliente(cliente), HttpStatus.CREATED);
+    @Autowired
+    private PetzService petzService;
 
-	}
-	@ApiOperation(value = "Creating new pet")
-	@PostMapping("/create/pet")
-	public ResponseEntity<Pet> createPet(@RequestBody Pet pet) {
-		return new ResponseEntity<>(petzService.createPet(pet), HttpStatus.CREATED);
-	}
+    @ApiOperation(value = "Creating new client")
+    @PostMapping("/create/cliente")
+    public ResponseEntity<Cliente> creatingClient(@RequestBody Cliente cliente) throws Throwable {
+        return new ResponseEntity<>(petzService.creatingClient(cliente), HttpStatus.CREATED);
 
-	@GetMapping("/retrieve/cliente")
-	public ResponseEntity<List<Cliente>> listandoCliente() {
-		return new ResponseEntity<>(petzService.retrieveCliente(), new HttpHeaders(), HttpStatus.OK);
-	}
+    }
 
-	@GetMapping("/retrieve/pet")
-	public ResponseEntity<List<Pet>> listandoPet() {
-		return new ResponseEntity<>(petzService.retrievePet(), new HttpHeaders(), HttpStatus.OK);
-	}
+    @ApiOperation(value = "Creating new pet")
+    @PostMapping("/create/pet")
+    public ResponseEntity<Pet> creatingPet(@RequestBody Pet pet) {
+        return new ResponseEntity<>(petzService.creatingPet(pet), HttpStatus.CREATED);
+    }
 
-	@PutMapping("/update/cliente/{id}")
-	public ResponseEntity<Response> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente) {
+    @GetMapping("/retrieve/cliente")
+    public ResponseEntity<List<Cliente>> retrievingClient() {
+        return new ResponseEntity<>(petzService.retrievingClient(), new HttpHeaders(), HttpStatus.OK);
+    }
 
-		petzService.updateClienteById(id, cliente);
+    @GetMapping("/retrieve/pet")
+    public ResponseEntity<List<Pet>> retrievingPet() {
+        return new ResponseEntity<>(petzService.retrievingPet(), new HttpHeaders(), HttpStatus.OK);
+    }
 
-		return ResponseEntity.ok(petzService.updateClienteById(id, cliente));
+    @PutMapping("/update/cliente/{id}")
+    public ResponseEntity<Response> updatingClient(@PathVariable("id") long id, @RequestBody Cliente cliente) {
+        return ResponseEntity.ok(petzService.updatingClient(id, cliente));
 
-	}
+    }
 
-	@PutMapping("/update/pet/{id}")
-	public ResponseEntity<Response> updatePet(@PathVariable("id") long id, @RequestBody Pet pet) {
+    @PutMapping("/update/pet/{id}")
+    public ResponseEntity<Response> updatingPet(@PathVariable("id") long id, @RequestBody Pet pet) {
+        return ResponseEntity.ok(petzService.updatingPet(id, pet));
+    }
 
-		petzService.updatePetById(id, pet);
+    @DeleteMapping("/delete/cliente")
+    public ResponseEntity<HttpStatus> deletingClientById(@RequestParam(required = true) long id) throws RoleInfoNotFoundException {
+        petzService.deletingClientById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-		return ResponseEntity.ok(petzService.updatePetById(id, pet));
-	}
-
-	@DeleteMapping("/delete/cliente")
-	public ResponseEntity<?> deleteClienteById(@RequestParam (required = true) long id) throws RoleInfoNotFoundException {
-
-		petzService.deleteClienteById(id);
-
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	@DeleteMapping("/delete/pet")
-	public ResponseEntity<?> deletePetById(@RequestParam (required = true)  long id) throws RoleInfoNotFoundException {
-
-		petzService.deletePetById(id);
-
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+    @DeleteMapping("/delete/pet")
+    public ResponseEntity<HttpStatus> deletingPetById(@RequestParam(required = true) long id) throws RoleInfoNotFoundException {
+        petzService.deletingPetById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

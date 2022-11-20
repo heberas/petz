@@ -22,7 +22,7 @@ public class PetzService {
     @Autowired
     private PetzPetRepository petzPetRepository;
 
-    public Cliente createCliente(Cliente cliente) {
+    public Cliente creatingClient(Cliente cliente) {
         try {
             return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
         } catch (Exception ex) {
@@ -30,7 +30,7 @@ public class PetzService {
         }
     }
 
-    public Pet createPet(Pet pet) {
+    public Pet creatingPet(Pet pet) {
         try {
             return petzPetRepository.saveAndFlush(pet);
         } catch (Exception ex) {
@@ -38,7 +38,7 @@ public class PetzService {
         }
     }
 
-    public List<Cliente> retrieveCliente() {
+    public List<Cliente> retrievingClient() {
         try {
             return petzClienteRepository.findAll();
         } catch (Exception ex) {
@@ -46,7 +46,7 @@ public class PetzService {
         }
     }
 
-    public List<Pet> retrievePet() {
+    public List<Pet> retrievingPet() {
         try {
             return petzPetRepository.findAll();
         } catch (Exception ex) {
@@ -54,7 +54,7 @@ public class PetzService {
         }
     }
 
-    public Response updateClienteById(long id, Cliente cliente) {
+    public Response updatingClient(long id, Cliente cliente) {
 
         Response response = new Response();
         try {
@@ -80,7 +80,7 @@ public class PetzService {
         return response;
     }
 
-    public Response updatePetById(long id, Pet pet) {
+    public Response updatingPet(long id, Pet pet) {
 
         Response response = new Response();
         try {
@@ -106,7 +106,7 @@ public class PetzService {
         return response;
     }
 
-    public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
+    public void deletingClientById(Long id) throws RoleInfoNotFoundException {
         try {
             Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
 
@@ -120,7 +120,7 @@ public class PetzService {
         }
     }
 
-    public void deletePetById(Long id) throws RoleInfoNotFoundException {
+    public void deletingPetById(Long id) throws RoleInfoNotFoundException {
         try {
             Optional<Pet> deletePet = petzPetRepository.findById(id);
 
