@@ -63,7 +63,7 @@ public class PetzController {
 	}
 
 	@DeleteMapping("/delete/cliente")
-	public ResponseEntity<HttpStatus> deleteClienteById(@RequestParam (required = true) long id) throws RoleInfoNotFoundException {
+	public ResponseEntity<?> deleteClienteById(@RequestParam (required = true) long id) throws RoleInfoNotFoundException {
 
 		petzService.deleteClienteById(id);
 
@@ -71,7 +71,7 @@ public class PetzController {
 	}
 
 	@DeleteMapping("/delete/pet")
-	public ResponseEntity<HttpStatus> deletePetById(@RequestParam (required = true)  long id) throws RoleInfoNotFoundException {
+	public ResponseEntity<?> deletePetById(@RequestParam (required = true)  long id) throws RoleInfoNotFoundException {
 
 		petzService.deletePetById(id);
 

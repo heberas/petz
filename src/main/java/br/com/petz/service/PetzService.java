@@ -107,26 +107,30 @@ public class PetzService {
     }
 
     public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
+        try {
+            Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
 
-        Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
-
-        if (deleteCliente.isPresent()) {
-            petzClienteRepository.deleteById(id);
-        } else {
-            throw new RoleInfoNotFoundException("No employee record exist for given id");
+            if (deleteCliente.isPresent()) {
+                petzClienteRepository.deleteById(id);
+            } else {
+                throw new RoleInfoNotFoundException("No employee record exist for given id");
+            }
+        } catch (Exception ex) {
+            throw ex;
         }
-
     }
 
     public void deletePetById(Long id) throws RoleInfoNotFoundException {
+        try {
+            Optional<Pet> deletePet = petzPetRepository.findById(id);
 
-        Optional<Pet> deletePet = petzPetRepository.findById(id);
-
-        if (deletePet.isPresent()) {
-            petzPetRepository.deleteById(id);
-        } else {
-            throw new RoleInfoNotFoundException("No employee record exist for given id");
+            if (deletePet.isPresent()) {
+                petzPetRepository.deleteById(id);
+            } else {
+                throw new RoleInfoNotFoundException("No employee record exist for given id");
+            }
+        } catch (Exception ex) {
+            throw ex;
         }
-
     }
 }
