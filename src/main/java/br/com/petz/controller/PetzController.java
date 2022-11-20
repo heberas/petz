@@ -16,6 +16,7 @@ import javax.management.relation.RoleInfoNotFoundException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/petz")
 @Api(value = "API PETZ")
 public class PetzController {
 
