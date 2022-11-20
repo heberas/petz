@@ -23,14 +23,12 @@ public class PetzController {
     @Autowired
     private PetzService petzService;
 
-    @ApiOperation(value = "Creating new client")
     @PostMapping("/create/cliente")
     public ResponseEntity<Cliente> creatingClient(@RequestBody Cliente cliente) throws Throwable {
         return new ResponseEntity<>(petzService.creatingClient(cliente), HttpStatus.CREATED);
 
     }
 
-    @ApiOperation(value = "Creating new pet")
     @PostMapping("/create/pet")
     public ResponseEntity<Pet> creatingPet(@RequestBody Pet pet) {
         return new ResponseEntity<>(petzService.creatingPet(pet), HttpStatus.CREATED);
