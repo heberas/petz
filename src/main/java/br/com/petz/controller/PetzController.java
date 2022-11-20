@@ -2,7 +2,7 @@ package br.com.petz.controller;
 
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
-import br.com.petz.model.Retorno;
+import br.com.petz.model.Response;
 import br.com.petz.service.PetzService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,7 +46,7 @@ public class PetzController {
 	}
 
 	@PutMapping("/update/cliente/{id}")
-	public ResponseEntity<Retorno> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente) {
+	public ResponseEntity<Response> updateCliente(@PathVariable("id") long id, @RequestBody Cliente cliente) {
 
 		petzService.updateClienteById(id, cliente);
 
@@ -55,7 +55,7 @@ public class PetzController {
 	}
 
 	@PutMapping("/update/pet/{id}")
-	public ResponseEntity<Retorno> updatePet(@PathVariable("id") long id, @RequestBody Pet pet) {
+	public ResponseEntity<Response> updatePet(@PathVariable("id") long id, @RequestBody Pet pet) {
 
 		petzService.updatePetById(id, pet);
 

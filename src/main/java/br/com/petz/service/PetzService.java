@@ -1,21 +1,17 @@
 package br.com.petz.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.management.relation.RoleInfoNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
-import com.github.dozermapper.core.DozerBeanMapperBuilder;
-
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
-import br.com.petz.model.Retorno;
+import br.com.petz.model.Response;
 import br.com.petz.repository.PetzClienteRepository;
 import br.com.petz.repository.PetzPetRepository;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.management.relation.RoleInfoNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PetzService {
@@ -25,9 +21,6 @@ public class PetzService {
 
     @Autowired
     private PetzPetRepository petzPetRepository;
-
-    private static final String STATUS_SUCCESS = "1";
-    private static final String STATUS_FAIL = "0";
 
     public Cliente createCliente(Cliente cliente) {
         try {
@@ -46,76 +39,71 @@ public class PetzService {
     }
 
     public List<Cliente> retrieveCliente() {
-
-        return petzClienteRepository.findAll();
+        try {
+            return petzClienteRepository.findAll();
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     public List<Pet> retrievePet() {
-
-        return petzPetRepository.findAll();
+        try {
+            return petzPetRepository.findAll();
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
-    public Retorno updateClienteById(long id, Cliente cliente) {
+    public Response updateClienteById(long id, Cliente cliente) {
 
-        Retorno retorno = new Retorno();
+        Response response = new Response();
+        try {
+            Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
 
-        Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
+            if (updateCliente.isPresent()) {
+                Cliente update = new Cliente();
+                update.setId(id);
+                update.setCpf(cliente.getCpf());
+                update.setNome(cliente.getNome());
+                update.setPet(cliente.getPet());
+                update.setSexo(cliente.getSexo());
 
-        if (updateCliente.isPresent()) {
-            Cliente update = new Cliente();
-            update.setId(id);
-            update.setCpf(cliente.getCpf());
-            update.setNome(cliente.getNome());
-            update.setPet(cliente.getPet());
-            update.setSexo(cliente.getSexo());
-
-            petzClienteRepository.save(update);
-
-        }
-        if (HttpStatus.OK != null && updateCliente.isPresent()) {
-            retorno.setCodigo(STATUS_SUCCESS);
-            retorno.setMensagem("Data Updated Successfully");
-
-        } else {
-
-            retorno.setCodigo(STATUS_FAIL);
-            retorno.setMensagem("Unable to update data");
-
+                petzClienteRepository.save(update);
+                response.setMessage("Data Updated Successfully");
+            } else {
+                response.setMessage("Unable to update data");
+            }
+        } catch (Exception ex) {
+            throw ex;
         }
 
-        return retorno;
+        return response;
     }
 
-    public Retorno updatePetById(long id, Pet pet) {
+    public Response updatePetById(long id, Pet pet) {
 
-        Retorno retorno = new Retorno();
+        Response response = new Response();
+        try {
+            Optional<Pet> updatePet = petzPetRepository.findById(id);
 
-        Optional<Pet> updatePet = petzPetRepository.findById(id);
+            if (updatePet.isPresent()) {
+                Pet update = new Pet();
+                update.setId(id);
+                update.setIdade(pet.getIdade());
+                update.setProduto(pet.getProduto());
+                update.setTipoPet(pet.getTipoPet());
+                update.setValor(pet.getValor());
 
-        if (updatePet.isPresent()) {
-            Pet update = new Pet();
-            update.setId(id);
-            update.setIdade(pet.getIdade());
-            update.setProduto(pet.getProduto());
-            update.setTipoPet(pet.getTipoPet());
-            update.setValor(pet.getValor());
-
-            petzPetRepository.save(update);
-
+                petzPetRepository.save(update);
+                response.setMessage("Data Updated Successfully");
+            } else {
+                response.setMessage("Unable to update data");
+            }
+        } catch (Exception ex) {
+            throw ex;
         }
 
-        if (HttpStatus.OK != null && updatePet.isPresent()) {
-            retorno.setCodigo(STATUS_SUCCESS);
-            retorno.setMensagem("Data Updated Successfully");
-
-        } else {
-
-            retorno.setCodigo(STATUS_FAIL);
-            retorno.setMensagem("Unable to update data");
-
-        }
-
-        return retorno;
+        return response;
     }
 
     public void deleteClienteById(Long id) throws RoleInfoNotFoundException {
