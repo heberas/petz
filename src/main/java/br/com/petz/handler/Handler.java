@@ -11,13 +11,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.Arrays;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class Handler extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BusinessException.class)
     @ResponseBody ErrorMessage
     businessException() {
-        return new ErrorMessage(VerifyExceptionName.BUSINESS_EXCEPTION.message);
+        return new ErrorMessage(ExceptionName.BUSINESS_EXCEPTION.message);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
