@@ -1,11 +1,11 @@
 package br.com.petz.controller;
 
+import br.com.petz.handler.exception.BusinessException;
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
 import br.com.petz.model.Response;
 import br.com.petz.service.PetzService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -45,13 +45,13 @@ public class PetzController {
     }
 
     @PutMapping("/update/cliente/{id}")
-    public ResponseEntity<Response> updatingClient(@PathVariable("id") long id, @RequestBody Cliente cliente) {
+    public ResponseEntity<Response> updatingClient(@PathVariable("id") long id, @RequestBody Cliente cliente) throws BusinessException {
         return ResponseEntity.ok(petzService.updatingClient(id, cliente));
 
     }
 
     @PutMapping("/update/pet/{id}")
-    public ResponseEntity<Response> updatingPet(@PathVariable("id") long id, @RequestBody Pet pet) {
+    public ResponseEntity<Response> updatingPet(@PathVariable("id") long id, @RequestBody Pet pet) throws BusinessException {
         return ResponseEntity.ok(petzService.updatingPet(id, pet));
     }
 

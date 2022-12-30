@@ -1,5 +1,6 @@
 package br.com.petz.service;
 
+import br.com.petz.handler.exception.BusinessException;
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
 import br.com.petz.model.Response;
@@ -22,7 +23,7 @@ public class PetzService {
     @Autowired
     private PetzPetRepository petzPetRepository;
 
-    public Cliente creatingClient(Cliente cliente) {
+    public Cliente creatingClient(Cliente cliente) throws RoleInfoNotFoundException {
         try {
             return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
         } catch (Exception ex) {
@@ -54,12 +55,13 @@ public class PetzService {
         }
     }
 
-    public Response updatingClient(long id, Cliente cliente) {
-
+    public Response updatingClient(long id, Cliente cliente) throws BusinessException {
         Response response = new Response();
         try {
+            if (id == 0) {
+                throw new BusinessException();
+            }
             Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
-
             if (updateCliente.isPresent()) {
                 Cliente update = new Cliente();
                 update.setId(id);
@@ -73,6 +75,8 @@ public class PetzService {
             } else {
                 response.setMessage("Unable to update data");
             }
+        } catch (BusinessException businessException) {
+            throw businessException;
         } catch (Exception ex) {
             throw ex;
         }
@@ -80,10 +84,13 @@ public class PetzService {
         return response;
     }
 
-    public Response updatingPet(long id, Pet pet) {
+    public Response updatingPet(long id, Pet pet) throws BusinessException {
 
         Response response = new Response();
         try {
+            if (id == 0) {
+                throw new BusinessException();
+            }
             Optional<Pet> updatePet = petzPetRepository.findById(id);
 
             if (updatePet.isPresent()) {
@@ -99,6 +106,8 @@ public class PetzService {
             } else {
                 response.setMessage("Unable to update data");
             }
+        } catch (BusinessException businessException) {
+            throw businessException;
         } catch (Exception ex) {
             throw ex;
         }
