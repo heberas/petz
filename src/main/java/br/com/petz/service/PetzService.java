@@ -1,6 +1,6 @@
 package br.com.petz.service;
 
-import br.com.petz.handler.exception.BusinessException;
+import br.com.petz.handler.exception.IdNotFoundException;
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
 import br.com.petz.model.Response;
@@ -9,8 +9,6 @@ import br.com.petz.repository.PetzPetRepository;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.management.relation.RoleInfoNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +57,7 @@ public class PetzService {
         Response response = new Response();
         try {
             if (id == 0) {
-                throw new BusinessException();
+                throw new IdNotFoundException();
             }
             Optional<Cliente> updateCliente = petzClienteRepository.findById(id);
             if (updateCliente.isPresent()) {
@@ -75,8 +73,8 @@ public class PetzService {
             } else {
                 response.setMessage("Unable to update data");
             }
-        } catch (BusinessException businessException) {
-            throw businessException;
+        } catch (IdNotFoundException idNotFoundException) {
+            throw idNotFoundException;
         } catch (Exception ex) {
             throw ex;
         }
@@ -89,7 +87,7 @@ public class PetzService {
         Response response = new Response();
         try {
             if (id == 0) {
-                throw new BusinessException();
+                throw new IdNotFoundException();
             }
             Optional<Pet> updatePet = petzPetRepository.findById(id);
 
@@ -106,8 +104,8 @@ public class PetzService {
             } else {
                 response.setMessage("Unable to update data");
             }
-        } catch (BusinessException businessException) {
-            throw businessException;
+        } catch (IdNotFoundException idNotFoundException) {
+            throw idNotFoundException;
         } catch (Exception ex) {
             throw ex;
         }
@@ -115,28 +113,28 @@ public class PetzService {
         return response;
     }
 
-    public void deletingClientById(Long id) throws RoleInfoNotFoundException {
+    public void deletingClientById(Long id) {
         try {
             Optional<Cliente> deleteCliente = petzClienteRepository.findById(id);
 
             if (deleteCliente.isPresent()) {
                 petzClienteRepository.deleteById(id);
             } else {
-                throw new RoleInfoNotFoundException("No employee record exist for given id");
+                throw new IdNotFoundException();
             }
         } catch (Exception ex) {
             throw ex;
         }
     }
 
-    public void deletingPetById(Long id) throws RoleInfoNotFoundException {
+    public void deletingPetById(Long id) {
         try {
             Optional<Pet> deletePet = petzPetRepository.findById(id);
 
             if (deletePet.isPresent()) {
                 petzPetRepository.deleteById(id);
             } else {
-                throw new RoleInfoNotFoundException("No employee record exist for given id");
+                throw new IdNotFoundException();
             }
         } catch (Exception ex) {
             throw ex;

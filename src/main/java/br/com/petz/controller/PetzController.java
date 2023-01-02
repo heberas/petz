@@ -1,6 +1,5 @@
 package br.com.petz.controller;
 
-import br.com.petz.handler.exception.BusinessException;
 import br.com.petz.model.Cliente;
 import br.com.petz.model.Pet;
 import br.com.petz.model.Response;
@@ -56,13 +55,13 @@ public class PetzController {
     }
 
     @DeleteMapping("/delete/cliente")
-    public ResponseEntity<HttpStatus> deletingClientById(@RequestParam(required = true) long id) throws RoleInfoNotFoundException {
+    public ResponseEntity<HttpStatus> deletingClientById(@RequestParam(required = true) long id) {
         petzService.deletingClientById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/pet")
-    public ResponseEntity<HttpStatus> deletingPetById(@RequestParam(required = true) long id) throws RoleInfoNotFoundException {
+    public ResponseEntity<HttpStatus> deletingPetById(@RequestParam(required = true) long id) {
         petzService.deletingPetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
