@@ -23,7 +23,7 @@ public class PetzService {
     @Autowired
     private PetzPetRepository petzPetRepository;
 
-    public Cliente creatingClient(Cliente cliente) throws RoleInfoNotFoundException {
+    public Cliente creatingClient(Cliente cliente) {
         try {
             return petzClienteRepository.save(DozerBeanMapperBuilder.buildDefault().map(cliente, Cliente.class));
         } catch (Exception ex) {
@@ -55,7 +55,7 @@ public class PetzService {
         }
     }
 
-    public Response updatingClient(long id, Cliente cliente) throws BusinessException {
+    public Response updatingClient(long id, Cliente cliente) {
         Response response = new Response();
         try {
             if (id == 0) {
@@ -84,7 +84,7 @@ public class PetzService {
         return response;
     }
 
-    public Response updatingPet(long id, Pet pet) throws BusinessException {
+    public Response updatingPet(long id, Pet pet) {
 
         Response response = new Response();
         try {

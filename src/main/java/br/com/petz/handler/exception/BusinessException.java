@@ -1,6 +1,6 @@
 package br.com.petz.handler.exception;
 
-public class BusinessException extends java.lang.Exception {
+public class BusinessException extends RuntimeException {
     public BusinessException() {
     }
 }

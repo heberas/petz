@@ -24,7 +24,7 @@ public class PetzController {
     private PetzService petzService;
 
     @PostMapping("/create/cliente")
-    public ResponseEntity<Cliente> creatingClient(@RequestBody Cliente cliente) throws Throwable {
+    public ResponseEntity<Cliente> creatingClient(@RequestBody Cliente cliente) {
         return new ResponseEntity<>(petzService.creatingClient(cliente), HttpStatus.CREATED);
 
     }
@@ -45,13 +45,13 @@ public class PetzController {
     }
 
     @PutMapping("/update/cliente/{id}")
-    public ResponseEntity<Response> updatingClient(@PathVariable("id") long id, @RequestBody Cliente cliente) throws BusinessException {
+    public ResponseEntity<Response> updatingClient(@PathVariable("id") long id, @RequestBody Cliente cliente) {
         return ResponseEntity.ok(petzService.updatingClient(id, cliente));
 
     }
 
     @PutMapping("/update/pet/{id}")
-    public ResponseEntity<Response> updatingPet(@PathVariable("id") long id, @RequestBody Pet pet) throws BusinessException {
+    public ResponseEntity<Response> updatingPet(@PathVariable("id") long id, @RequestBody Pet pet) {
         return ResponseEntity.ok(petzService.updatingPet(id, pet));
     }
 

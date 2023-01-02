@@ -21,9 +21,9 @@ public class Handler extends ResponseEntityExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     @ResponseBody ErrorMessage
-    exception(Exception exception) {
-        return new ErrorMessage(Arrays.stream(exception.getStackTrace()).toList().toString());
+    exception() {
+        return new ErrorMessage(ExceptionName.EXCEPTION.message);
     }
 }
