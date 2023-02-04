@@ -1,6 +1,5 @@
 package br.com.petz;
 
-
 import io.swagger.annotations.Api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
