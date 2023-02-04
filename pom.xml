@@ -13,7 +13,7 @@
     <artifactId>petz</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>petz</name>
-    <description>Project Spring Boot</description>
+    <description>PETZ</description>
 
     <properties>
         <java.version>19</java.version>
